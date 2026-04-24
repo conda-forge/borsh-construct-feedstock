@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/borsh-construct-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/borsh-construct-{{ version }}.tar.gz
   sha256: c916758ceba70085d8f456a1cc26991b88cb64233d347767766473b651b37263
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --use-deprecated=out-of-tree-build
 
@@ -19,10 +19,10 @@ requirements:
   host:
     - pip
     - poetry-core
-    - python >=3.6,<4.0
+    - python {{ python_min }}
   run:
     - construct-typing >=0.5.2,<0.6.0
-    - python >=3.6,<4.0
+    - python >={{ python_min }},<4.0
     - sumtypes >=0.1a5,<0.2
 
 test:
@@ -32,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/near/borsh-construct-py
